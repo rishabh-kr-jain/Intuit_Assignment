@@ -1,0 +1,18 @@
+Hello World! This is a sample text file for the producer-consumer application.
+The producer will read each character from this file and send it to the shared queue.
+The consumer will then receive and process each character one by one.
+Hello World! This is a sample text file for the producer-consumer application.
+The producer will read each character from this file and send it to the shared queue.
+The consumer will then receive and process each character one by one.
+Hello World! This is a sample text file for the producer-consumer application.
+The producer will read each character from this file and send it to the shared queue.
+The consumer will then receive and process each character one by one.
+Hello World! This is a sample text file for the producer-consumer application.
+The producer will read each character from this file and send it to the shared queue.
+The consumer will then receive and process each character one by one.
+Hello World! This is a sample text file for the producer-consumer application.
+The producer will read each character from this file and send it to the shared queue.
+The consumer will then receive and process each character one by one.
+Hello World! This is a sample text file for the producer-consumer application.
+The producer will read each character from this file and send it to the shared queue.
+The consumer will then receive and process each character one by one.
