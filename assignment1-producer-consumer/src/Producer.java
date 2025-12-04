@@ -6,11 +6,11 @@ import model.Item;
 
 public class Producer implements Runnable {
 
-    private final SharedQueue sharedQueue;
+    private final BlockingQueue queue;
     private final String filePath;
 
-    public Producer(SharedQueue sharedQueue, String filePath) {
-        this.sharedQueue = sharedQueue;
+    public Producer(BlockingQueue queue, String filePath) {
+        this.queue = queue;
         this.filePath = filePath;
     }
 
@@ -24,15 +24,13 @@ public class Producer implements Runnable {
                     while ((charCode = reader.read()) != -1) {
                         char c = (char) charCode;
                         System.out.println("Producer produced: '" + c + "'");
-                        sharedQueue.put(new Item(c));
+                        queue.put(new Item(c));
                     }
                 } catch (IOException e) {
                     System.err.println("Error reading file: " + e.getMessage());
                 }
                 System.out.println("--- Producer finished reading file, restarting in 10 seconds... ---");
-
-                // Sleep for a while before restarting                
-                Thread.sleep(10000); // 10 seconds
+                Thread.sleep(10000);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

@@ -6,11 +6,11 @@ import model.Item;
 
 public class Consumer implements Runnable {
 
-    private final SharedQueue sharedQueue;
+    private final BlockingQueue queue;
     private final String outputFilePath;
 
-    public Consumer(SharedQueue sharedQueue, String outputFilePath) {
-        this.sharedQueue = sharedQueue;
+    public Consumer(BlockingQueue queue, String outputFilePath) {
+        this.queue = queue;
         this.outputFilePath = outputFilePath;
     }
 
@@ -20,7 +20,7 @@ public class Consumer implements Runnable {
             System.out.println("Writing output to: " + outputFilePath);
 
             while (!Thread.currentThread().isInterrupted()) {
-                Item item = sharedQueue.take();
+                Item item = queue.take();
                 char c = item.getCharacter();
                 System.out.println("Consumer consumed: '" + c + "'");
                 writer.write(c);

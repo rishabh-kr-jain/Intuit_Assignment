@@ -4,28 +4,19 @@ import java.util.concurrent.Executors;
 public class Main {
 
     public static void main(String[] args) {
-        // Default file paths - can be overridden via command line arguments
-        String inputFilePath = "input.txt";
-        String outputFilePath = "output.txt";
+        // Load configuration
+        AppConfig config = new AppConfig();
+        config.printConfig();
 
-        if (args.length > 0) {
-            inputFilePath = args[0];
-        }
-        if (args.length > 1) {
-            outputFilePath = args[1];
-        }
-
-        System.out.println("Reading from file: " + inputFilePath);
-        System.out.println("Writing to file: " + outputFilePath);
         System.out.println("Press Ctrl+C to stop...\n");
 
-        SharedQueue sharedQueue = new SharedQueue(10);
+        BlockingQueue queue = new BlockingQueue(config.getQueueCapacity());
 
-        Producer producer = new Producer(sharedQueue, inputFilePath);
-        Consumer consumer = new Consumer(sharedQueue, outputFilePath);
+        Producer producer = new Producer(queue, config.getInputFile());
+        Consumer consumer = new Consumer(queue, config.getOutputFile());
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
-        
+
         // Add shutdown hook to gracefully stop on Ctrl+C
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("\nShutting down...");
@@ -34,8 +25,5 @@ public class Main {
 
         executor.submit(producer);
         executor.submit(consumer);
-
-        // Don't shutdown - let it run forever until interrupted
-        // executor.shutdown();
     }
 }

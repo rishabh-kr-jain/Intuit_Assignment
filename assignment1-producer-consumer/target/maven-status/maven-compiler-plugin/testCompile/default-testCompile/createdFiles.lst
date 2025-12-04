@@ -1,4 +1,4 @@
 ProducerTest.class
-BlockingBehaviorTest.class
 IntegrationTest.class
+BlockingQueueTest.class
 ConsumerTest.class

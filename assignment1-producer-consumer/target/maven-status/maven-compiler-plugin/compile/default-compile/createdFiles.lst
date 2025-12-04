@@ -1,5 +1,6 @@
+AppConfig.class
 Producer.class
 Main.class
 Consumer.class
-SharedQueue.class
+BlockingQueue.class
 model/Item.class
